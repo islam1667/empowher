@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --light-pink: #FFD6E0;
+            --light-green: #C1E1C1;
+            --dark-pink: #FF8FAB;
+            --dark-green: #77A877;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .btn-primary:hover {
+            background-color: #669966;
+            border-color: #669966;
+        }
+        
+        .form-control:focus {
+            border-color: var(--light-green);
+            box-shadow: 0 0 0 0.25rem rgba(193, 225, 193, 0.25);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: var(--dark-green);
+        }
+        
+        .form-label {
+            color: #495057;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .signup-bg {
+            background-color: var(--light-green);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .login-link a {
+            color: var(--dark-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Create Account</h1>
+            <p class="text-muted">Sign up for a new account</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="signup-bg">
+                <h5 class="text-center">Sign Up</h5>
+            </div>
+            
+            <form id="signup-form" method="post" action="javascript:void(0);" onsubmit="return false;">
+                <div class="mb-3">
+                    <label for="signupName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="signupName" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signupEmail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="signupEmail" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signupPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signupPassword" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" required >
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                    <label class="form-check-label" for="agreeTerms">I agree to the Terms & Conditions</label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button id="signupButton" type="button" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+            
+            <div class="login-link">
+                <p>Already have an account? <a href="login-page.html">Login here</a></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // Get form element
+        const form = document.getElementById('signupForm');
+
+        // Also add click event to button
+        document.getElementById('signupButton').addEventListener('click', function() {
+            console.log("button clicked");
+            // Get form values
+            const fullName = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation flags
+            let isValid = true;
+            let errorMessage = "";
+
+            // Validate username length (6-15 characters)
+            if (fullName.length < 6 || fullName.length > 15) {
+                errorMessage += "Username must be between 6-15 characters.\n";
+                isValid = false;
+            }
+
+            // Validate email using simple regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage += "Please enter a valid email address.\n";
+                isValid = false;
+            }
+
+            // Validate password length (8-20 characters)
+            if (password.length < 8 || password.length > 20) {
+                errorMessage += "Password must be between 8-20 characters.\n";
+                isValid = false;
+            }
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                errorMessage += "Passwords do not match.\n";
+                isValid = false;
+            }
+
+            // If validation failed, show error message
+            if (!isValid) {
+                alert(errorMessage);
+                return;
+            }
+
+            // If everything is valid, send POST request
+            fetch('/signup', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: fullName,
+                    password: password,
+                    email: email
+                })
+            })
+                .then(async response => {
+                    if (!response.ok) {
+                        // 🔥 Safely read response body as text, then throw it as real error
+                        const errorText = await response.text();
+                        throw new Error(errorText || "Unknown error from server");
+                    }
+                    return response.json(); // ✅ Safe to parse as JSON now
+                })
+                .then(data => {
+                    console.log("Success:", data);
+                    alert("Signup successful!\n" + data.message);
+                    window.location.href = "login";
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Signup failed:\n" + error.message); // ✅ Shows real message, not [object Promise]
+                });
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

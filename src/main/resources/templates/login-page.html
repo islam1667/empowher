@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --light-pink: #FFD6E0;
+            --light-green: #C1E1C1;
+            --dark-pink: #FF8FAB;
+            --dark-green: #77A877;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .btn-primary:hover {
+            background-color: #669966;
+            border-color: #669966;
+        }
+        
+        .form-control:focus {
+            border-color: var(--light-green);
+            box-shadow: 0 0 0 0.25rem rgba(193, 225, 193, 0.25);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: var(--dark-green);
+        }
+        
+        .form-label {
+            color: #495057;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .login-bg {
+            background-color: var(--dark-green);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .signup-link a {
+            color: var(--dark-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome Back</h1>
+            <p class="text-muted">Login to your account</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="login-bg">
+                <h5 class="text-center">Login</h5>
+            </div>
+            <div th:if="${param.error}">
+                Invalid username and password.</div>
+            <div th:if="${param.logout}">
+                You have been logged out.</div>
+            <form th:action="@{/login}" method="post" onsubmit="return false;">
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="loginEmail" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" name="password" required>
+                </div>
+<!--                <div class="mb-3 form-check">-->
+<!--                    <input type="checkbox" class="form-check-input" id="rememberMe">-->
+<!--                    <label class="form-check-label" for="rememberMe">Remember me</label>-->
+<!--                </div>-->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="#" class="text-decoration-none" style="color: var(--dark-pink);">Forgot password?</a>
+                </div>
+            </form>
+            
+            <div class="signup-link">
+                <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Get form element
+        const form = document.querySelector('form');
+
+        // Add event listener for form submission
+        form.addEventListener('submit', function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Get form values
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Validation flags
+            let isValid = true;
+            let errorMessage = "";
+
+            // Validate email using simple regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage += "Please enter a valid email address.\n";
+                isValid = false;
+            }
+
+            // Validate password (not empty and at least 8 characters)
+            if (password.length < 8) {
+                errorMessage += "Password must be at least 8 characters.\n";
+                isValid = false;
+            }
+
+            // If validation failed, show error message
+            if (!isValid) {
+                alert(errorMessage);
+                return;
+            }
+
+            // If everything is valid, simulate form submission
+            // alert("Login successful! Redirecting...");
+
+            // In a real application, you would send the form data to your server
+            // For example:
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    //remember: document.getElementById('rememberMe').checked
+                })
+            });
+            // .then(response => {
+            //     if (response.ok) {
+            //         return response.json();
+            //     }
+            //     throw new Error('Login failed');
+            // })
+            // .then(data => {
+            //     console.log('Success:', data);
+            //     alert("Login successful");
+            //     window.location.href = ''; // Redirect to dashboard
+            // })
+            // .catch(error => {
+            //     console.error('Error:', error);
+            //     alert('Login failed. Please check your credentials.' + error.message);
+            // });
+        });
+    </script>
+</body>
+</html>

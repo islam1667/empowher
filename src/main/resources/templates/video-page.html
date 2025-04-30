@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed">
+    <style>
+        body{
+            font-family: "Barlow Semi Condensed", sans-serif;
+        }
+        nav{
+           font-family: Poppins, sans-serif;
+        }
+        .comment {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .comment-form {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation - Based on empowHer header -->
+<nav class="navbar navbar-expand-lg" style="background-color: #4a4a4a;">
+    <div class="container">
+        <a class="navbar-brand text-white fs-4 fw-bold" href="#">empowHer</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#footer">Contact</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <a href="/login" class="btn text-white me-2">Login</a>
+                <a href="/signup" class="btn text-white rounded-pill px-4" style="background-color: #0c7157;">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Video Section -->
+        <div class="col-lg-8">
+            <h1 class="mb-4">Woman Rights - Informative Talk by Xəyalə Cəfərova</h1>
+            <div class="video-container mb-4">
+                <!-- Replace the placeholder with your actual video embed code -->
+<!--                <img src="/api/placeholder/800/450" alt="Video placeholder" class="img-fluid">-->
+                <iframe src="https://drive.google.com/file/d/1btawsH7HEL6M_5mgCPQI0Pmtpk8gRudu/preview" width="800" allow="autoplay"></iframe>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <span class="text-muted">Published on: April 8, 2025</span>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-outline-primary me-2">
+                        <i class="bi bi-hand-thumbs-up"></i> Like
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-share"></i> Share
+                    </button>
+                </div>
+            </div>
+
+            <h3>Video Description</h3>
+            <p>In this video, a lawyer breaks down important legal rights every woman should know —
+                from workplace equality to protection against harassment and violence. She explains
+                how the law empowers women to stand up for themselves and seek justice.</p>
+
+            <!-- Comments Section -->
+            <div class="mt-5">
+                <h3>Comments <span class="badge bg-secondary">1</span></h3>
+
+                <!-- Comment Form -->
+                <div class="comment-form">
+                    <form id="commentForm">
+<!--                        <div class="mb-3">-->
+<!--                            <label for="name" class="form-label">Name</label>-->
+<!--                            <input type="text" class="form-control" id="name" name="name" required>-->
+<!--                        </div>-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="email" class="form-label">Email</label>-->
+<!--                            <input type="email" class="form-control" id="email" name="email" required>-->
+<!--                        </div>-->
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Your Comment</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" disabled>Submit Comment</button>
+                    </form>
+                </div>
+
+                <!-- Comments List -->
+                <div class="comments-list">
+                    <!-- Sample Comment 1 -->
+                    <div class="comment">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <img src="/resources/homepage/50.svg" class="rounded-circle" alt="User">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Jalala</h5>
+                                <p class="text-muted small">Posted on April 9, 2025</p>
+                                <p>Great video! I really enjoyed the content and learned a lot from it.
+                                    Looking forward to more videos like this in the future.</p>
+<!--                                <div>-->
+<!--                                    <button class="btn btn-sm btn-link">Reply</button>-->
+<!--                                    <button class="btn btn-sm btn-link">Like</button>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+<!--        <div class="col-lg-4">-->
+<!--            <div class="card mb-4">-->
+<!--                <div class="card-header">-->
+<!--                    Related Videos-->
+<!--                </div>-->
+<!--                <ul class="list-group list-group-flush">-->
+<!--                    <li class="list-group-item">-->
+<!--                        <div class="d-flex">-->
+<!--                            <img src="/api/placeholder/120/80" alt="Video thumbnail" class="flex-shrink-0">-->
+<!--                            <div class="ms-3">-->
+<!--                                <h6>Related Video Title 1</h6>-->
+<!--                                <p class="text-muted small">3.5K views • 2 days ago</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="list-group-item">-->
+<!--                        <div class="d-flex">-->
+<!--                            <img src="/api/placeholder/120/80" alt="Video thumbnail" class="flex-shrink-0">-->
+<!--                            <div class="ms-3">-->
+<!--                                <h6>Related Video Title 2</h6>-->
+<!--                                <p class="text-muted small">1.2K views • 5 days ago</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="list-group-item">-->
+<!--                        <div class="d-flex">-->
+<!--                            <img src="/api/placeholder/120/80" alt="Video thumbnail" class="flex-shrink-0">-->
+<!--                            <div class="ms-3">-->
+<!--                                <h6>Related Video Title 3</h6>-->
+<!--                                <p class="text-muted small">8.7K views • 1 week ago</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+
+<!--            <div class="card">-->
+<!--                <div class="card-header">-->
+<!--                    Subscribe to Newsletter-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!--                    <p>Stay updated with our latest videos and content!</p>-->
+<!--                    <form>-->
+<!--                        <div class="mb-3">-->
+<!--                            <input type="email" class="form-control" placeholder="Your email address">-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-primary">Subscribe</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+
+<!-- Footer - Based on empowHer footer -->
+<footer class="bg-dark text-white mt-5 py-4" id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-center text-md-start mb-4 mb-md-0">
+                <img src="/resources/homepage/Project-logo.jpg" alt="EmpowHer Logo" style="height: 80px;" class="mb-3">
+                <p class="small">Unlock your potential with our expert-led online courses. Learn anytime, anywhere.</p>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="/" class="text-white text-decoration-none">Courses</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>Contact Us</h5>
+                <ul class="list-unstyled">
+                    <li>Email: support@edulearn.com</li>
+                    <li>Phone: +123 456 7890</li>
+                    <li>Location: Baku, Azerbaijan</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>Follow Us</h5>
+                <div class="d-flex mb-3">
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                </div>
+                <h5>Subscribe</h5>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Enter your email">
+                    <button class="btn text-white" style="background-color: #e83e8c;" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <p>© 2025 empowHer. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript for comment functionality -->
+<script>
+    // Simple client-side validation
+    document.getElementById('commentForm').addEventListener('submit', function(event) {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const comment = document.getElementById('comment').value;
+
+        //if (!name || !email || !comment) {
+          if (!comment) {
+            event.preventDefault();
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        // In a real implementation, you would handle the form submission via AJAX
+        // and update the comments section without refreshing the page
+        // This is just a simple example
+        alert('Your comment has been submitted! (Note: In a real implementation, this would be processed by your server)');
+    });
+</script>
+</body>
+</html>
